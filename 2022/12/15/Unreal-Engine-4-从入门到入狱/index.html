@@ -1,0 +1,646 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Unreal Engine 4 从入门到入狱 | Darking's Blog</title><meta name="author" content="Darking"><meta name="copyright" content="Darking"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="UE4逆向教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unreal Engine 4 从入门到入狱">
+<meta property="og:url" content="http://darking.cc/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/index.html">
+<meta property="og:site_name" content="Darking&#39;s Blog">
+<meta property="og:description" content="UE4逆向教程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-ac36f232a5ceaec485025d265caa79cc_180x120.jpg">
+<meta property="article:published_time" content="2022-12-15T15:26:32.000Z">
+<meta property="article:modified_time" content="2022-12-15T16:03:32.000Z">
+<meta property="article:author" content="Darking">
+<meta property="article:tag" content="Unreal Engine4 逆向">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.zhimg.com/v2-ac36f232a5ceaec485025d265caa79cc_180x120.jpg"><link rel="shortcut icon" href="/img/TX.jpg"><link rel="canonical" href="http://darking.cc/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Darking","link":"链接: ","source":"来源: Darking's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Unreal Engine 4 从入门到入狱',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-12-16 00:03:32'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/TX.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic1.zhimg.com/v2-ac36f232a5ceaec485025d265caa79cc_180x120.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Darking's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Unreal Engine 4 从入门到入狱</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-15T15:26:32.000Z" title="发表于 2022-12-15 23:26:32">2022-12-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-15T16:03:32.000Z" title="更新于 2022-12-16 00:03:32">2022-12-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Unreal Engine 4 从入门到入狱"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Unreal-Engine-4-从入门到入狱"><a href="#Unreal-Engine-4-从入门到入狱" class="headerlink" title="Unreal Engine 4 从入门到入狱"></a>Unreal Engine 4 从入门到入狱</h1><h3 id="什么是Uworld？"><a href="#什么是Uworld？" class="headerlink" title="什么是Uworld？"></a>什么是Uworld？</h3><p><strong>Uworld</strong> 地址（ 世界地址 ） -&gt; 包含 <strong>Actor</strong> ( 对象数组  )</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-&gt; 包含 **Count** ( 对象数量 )</span><br></pre></td></tr></table></figure>
+
+<p><strong>Count</strong>：对应 <strong>Actor</strong> 对象数组中的对象计数</p>
+<p><strong>Actor</strong>：</p>
+<ul>
+<li>是包含Uworld世界中所有实体对象的对象数组（比如游戏中的一辆载具，或者是一只丧失）</li>
+<li>对象数组中每个对象的间隔： 0x8  0x10  0x18  0x20（ 根据游戏的不同每个对象的间隔有时也不同 ）</li>
+</ul>
+<p>关系： Count - 8 &#x3D; Actor（ 游戏中可能有多个Count 有的数值大 有的数值小）</p>
+<h2 id="如何使用CE寻找Uworld"><a href="#如何使用CE寻找Uworld" class="headerlink" title="如何使用CE寻找Uworld"></a>如何使用CE寻找Uworld</h2><h3 id="利用Count（-数量-）反向寻找Uworld"><a href="#利用Count（-数量-）反向寻找Uworld" class="headerlink" title="利用Count（ 数量 ）反向寻找Uworld"></a>利用Count（ 数量 ）反向寻找Uworld</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在UE4游戏中，一般一颗子弹也算一个实体对象，所以我们可以利用这个特性。先大致估一个Count的数值范围（如 1 - 3000），使用CE搜介于两者之间的4字节类型。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/2c7575dd67f5c05ebd66e5eedcb1a0b8.png" alt="截图"></p>
+<p>利用Actor &#x3D; Count - 8 的关系确定找到的地址是否为 Count</p>
+<p>这里找到了一个地址为 <strong>293F37B4860</strong> 的地址</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/b5d881a212924ea808d7f4d30ed92fa5.png" alt="截图"></p>
+<p>选中这个地址 Ctrl+B浏览内存 在内存浏览窗口内右键把显示类型改成8字节16进制</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/b83960ca629903bc55feec2bd68479aa.png" alt="截图"></p>
+<p>这里的57A就是十六进制的1402对应上上图 </p>
+<p>我们找到 <strong>293F37B4860</strong> 的上一个地址<strong>293F37B4858</strong>按空格进入</p>
+<p>可以看到这种排列整齐结构相同的地址列，所以我们可以确定此地址就是Count，地址<strong>293F37B4858</strong>就是Actor（ Actor &#x3D; Count - 8  ）</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/b5d881a212924ea808d7f4d30ed92fa5.png" alt="截图"></p>
+<p>我们继续右键Count地址，点击”找出是什么访问了这个地址”</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/2c8bcf1eb722769acd8868529333c474.png" alt="截图"></p>
+<p>点击显示反汇编程序 根据汇编代码我们可以看到</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/ed2e91bc188184b286e56fab2e206881.png" alt="截图"></p>
+<br>
+
+<p>rax+000000A0 就是我们的Count，而 rax 又等于 rcx+30 所以我们要搞清楚rcx是多少。</p>
+<p>我们可以在下面两处代码处分别下端运行 看看寄存器里的rax 或 rcx是否是静态地址</p>
+<p>SCUM.exe+3F6A139 - 48 8B 41 30           - mov rax,[rcx+30]</p>
+<p>SCUM.exe+3F6A142 - 83 B8 A0000000 00     - cmp dword ptr [rax+000000A0],00</p>
+<p>经过多次运行，我们发现分别在上述两行代码处下端运行rax 或 rcx都不会变化，所以我们</p>
+<p>可以直接在CE中搜索rcx的值，找到对应该值得静态地址</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/6e00b09df6380e18425ce18e0dced25a.png" alt="截图"></p>
+<p><strong>&#x3D;&#x3D;6D52D40&#x3D;&#x3D;</strong>  就是Uwolrd的静态偏移</p>
+<h2 id="如何使用CE寻找Gname"><a href="#如何使用CE寻找Gname" class="headerlink" title="如何使用CE寻找Gname"></a>如何使用CE寻找Gname</h2><h3 id="什么是Gname？"><a href="#什么是Gname？" class="headerlink" title="什么是Gname？"></a>什么是Gname？</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Gname是用于UE4中储存所有实体对象类名名称的名称表，每个实体对象中都有一个ID来对应Gname中相应的类名名称。</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何寻找4-23版本一下Gname（旧版）"><a href="#如何寻找4-23版本一下Gname（旧版）" class="headerlink" title="如何寻找4.23版本一下Gname（旧版）"></a>如何寻找4.23版本一下Gname（旧版）</h3><p>待记录。</p>
+<h3 id="如何寻找4-23版本以上Gname（新版）"><a href="#如何寻找4-23版本以上Gname（新版）" class="headerlink" title="如何寻找4.23版本以上Gname（新版）"></a>如何寻找4.23版本以上Gname（新版）</h3><p>利用CE查找关键字符串：<strong>ByteProperty</strong></p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/f03e5d15e5d75e659ac2df6f7c8648f8.png" alt="截图"></p>
+<p>找到类似这样，地址 - 8 后地址后四位等于 0000 的地址</p>
+<p>我们继续搜索这个 - 8 后的地址 <strong>29329150000</strong>会出现一个静态地址</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/3961924eb1ef94c3b93a06f61eb2a85f.png" alt="截图"></p>
+<p>这个静态地址（SCUM.exe+6BD0550）所指向的地址 - 10（HEX）就是Gname</p>
+<p>所以&#x3D;&#x3D;<strong>6BD0540</strong>&#x3D;&#x3D;就是Gname的静态偏移。</p>
+<h2 id="如何使用IDA寻找Uworld"><a href="#如何使用IDA寻找Uworld" class="headerlink" title="如何使用IDA寻找Uworld"></a>如何使用IDA寻找Uworld</h2><p>打开游戏后，使用“Scylla_v0.9.8”转储该游戏的dump文件</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/654a19d897f1438360e1febd1ae44081.png" alt="截图"></p>
+<p>用IDA打开刚才转储的SCUM_DUMP.exe文件进行分析（过程稍慢，耐心等待）</p>
+<p>分析完后，我们需要记录一个值（Imagebase），这个值就相当于CE中的SCUM.exe ( 基地址 )。</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/211fd7c0ee4fa5893bc4fbc347a1fbcc.png" alt="截图"></p>
+<p>Shift+F12分析字符串，等待IDA处理完毕，</p>
+<p>然后我们按Ctrl+F搜索关键字符串：<strong>SeamlessTravel FlushLevelStreaming</strong></p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/27e9aed9b2259a4362ee3a76b5c6149f.png" alt="截图"></p>
+<p>双击进去然后Ctrl+X交叉引用</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/592db92d8a360fa088ed0053c0e4b482.png" alt="截图"></p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/1924a11d74fdbca5486c9be867e3065e.png" alt="截图"></p>
+<p>用这个地址减去我们之前记录的基地址就可以得到当前版本Uworld的静态偏移。</p>
+<h2 id="如何使用IDA寻找Gname"><a href="#如何使用IDA寻找Gname" class="headerlink" title="如何使用IDA寻找Gname"></a>如何使用IDA寻找Gname</h2><p>通过关键字符串： <strong>ByteProperty</strong>  搜索</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/7ec600097c691472904423de1648261d.png" alt="截图"></p>
+<p>Ctrl+X交叉引用</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/d92da571df80cb9a9dfd1bf87d16232d.png" alt="截图"></p>
+<p>得到一个比较规整的类似CE搜索该字符出现的比较规律的排列</p>
+<p>我们F5反汇编此段函数，然后拉到该函数的头部，为了更好的找到这个函数头，我们把他的头部修改为FnamePool_fun.</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/82c10bb2dfcaf23fcd7242c5f9159ef2.png" alt="截图"></p>
+<p>然后返回IDA View-A视窗拉到这个函数头部随便找个函数交叉引用进去F5反汇编</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/38940398fdd9003de51b4ace930c94fc.png" alt="截图"></p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/abb661ae4744015654f9c307bce5ad16.png" alt="截图"></p>
+<p>上图这个地址就是Gname。</p>
+<p>我们可以减去我们之前记录的基地址，就可以的到Gname的静态偏移。</p>
+<h2 id="如何使用IDA寻找GameInstance-Ulevel-Actor"><a href="#如何使用IDA寻找GameInstance-Ulevel-Actor" class="headerlink" title="如何使用IDA寻找GameInstance.Ulevel.Actor"></a>如何使用IDA寻找GameInstance.Ulevel.Actor</h2><h3 id="如何使用IDA寻找Ulevel"><a href="#如何使用IDA寻找Ulevel" class="headerlink" title="如何使用IDA寻找Ulevel"></a>如何使用IDA寻找Ulevel</h3><p>我们通过关键字符串：    找到Uworld地址</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/a912857212a1e6254bca85f126b194ba.png" alt="截图"></p>
+<p>按X，在引用里寻找两个一样的 <strong>Call</strong> 指令</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/78c28479154ccff2953ef9f9af46de22.png" alt="截图"></p>
+<p>双击进入CALL</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/6782d117faa0056e1034cd06f5accfa7.png" alt="截图"></p>
+<p>0x30便是Ulevel的静态偏移。</p>
+<h3 id="如何使用IDA寻找GameInstance"><a href="#如何使用IDA寻找GameInstance" class="headerlink" title="如何使用IDA寻找GameInstance"></a>如何使用IDA寻找GameInstance</h3><p>通过搜索字符串：  <strong>InWorld-&gt;GetGameInstance() is null</strong> 双击进去</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/27dd64c5307019007f7a35b7e0c2dc83.png" alt="截图"></p>
+<p>然后交叉引用 Ctrl+X</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/c78048b1a64861b111a752d58f81f5e9.png" alt="截图"></p>
+<h3 id="如何使用CE寻找LocalPlayer-PlayerController"><a href="#如何使用CE寻找LocalPlayer-PlayerController" class="headerlink" title="如何使用CE寻找LocalPlayer.PlayerController"></a>如何使用CE寻找LocalPlayer.PlayerController</h3><p>LocalPlayer（本地播放器）.PlayerController（玩家控制器）.Apawn（本人）都包含在GameInstance里</p>
+<p>在所有标准的UE4引擎中，PlayerController的偏移都为 0x38-&gt;0x0-&gt;0x30</p>
+<p>所以LocalPlayer（本地播放器的偏移为 0x38-&gt;0x0），我们可以通过其他方法验证</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/bb4fb58e50549ed667ee1f06d6391ec0.png" alt="截图"></p>
+<p>因为SDK里 LocalPlayer（本地播放器）的变量是由数组方式呈现的，每个数组都有最大</p>
+<p>数量和当前数量，因为我们本地玩家只有一个所以最小数量是1，而4就是定义数组时他的</p>
+<p>最大数量，所以0x38就是localplayer的指针。</p>
+<h3 id="接下来我们在Localplayer中寻找Apawn（本地玩家）："><a href="#接下来我们在Localplayer中寻找Apawn（本地玩家）：" class="headerlink" title="接下来我们在Localplayer中寻找Apawn（本地玩家）："></a>接下来我们在Localplayer中寻找Apawn（本地玩家）：</h3><p>我们要找到<strong>两 - 三个相差不远，地址后四位相同</strong>的指针（ 一般从0x100偏移处往后找）</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/02a21472809639c57ef38b6df98c5a72.png" alt="截图"></p>
+<p>这三个相同的指针都是Apawn，我们随意用哪个偏移都可以。</p>
+<h3 id="如何利用-Apawn（本地玩家）寻找共用坐标偏移："><a href="#如何利用-Apawn（本地玩家）寻找共用坐标偏移：" class="headerlink" title="如何利用 Apawn（本地玩家）寻找共用坐标偏移："></a>如何利用 Apawn（本地玩家）寻找共用坐标偏移：</h3><p>在标准的UE4引擎中，公用坐标的偏移一般在 0x100 - 0x160 之间。</p>
+<p>我们在0x100 - 0x160之间先寻找到一个数组指针，特征类似这样：</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/20ae02e52ac8cd6ce9ea607b568a68b5.png" alt="截图"></p>
+<p>在这个数组指针的下方就是我们的公用坐标（RootComponent）偏移：0x130</p>
+<p>在公用坐标中一般有3组类似坐标：</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/16a84d0e5d191de7deb98b33b114edd3.png" alt="截图"></p>
+<p>可以用做我们验证此处是否为公用坐标。</p>
+<p>小结：我们通过GameInstance找到了如下关系数据：</p>
+<p>GameInstance-&gt;ULocalPlayer-&gt;LocalPlayer-&gt;PlayerController-&gt;Apawn-&gt;RootComponent-&gt;Vector(坐标)</p>
+<h2 id="如何利用通用特征码寻找矩阵偏移（两种方法）"><a href="#如何利用通用特征码寻找矩阵偏移（两种方法）" class="headerlink" title="如何利用通用特征码寻找矩阵偏移（两种方法）"></a>如何利用通用特征码寻找矩阵偏移（两种方法）</h2><p>矩阵特征码：</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/91d35f961dc87ce78ef708d77c04f053.png" alt="截图"></p>
+<p>我们找到带有矩阵特征的地址：（下图为矩阵特征，Ctrl+B后需要向下翻找）</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/42934e21f09cc3e184e5b0f11c68f63f.png" alt="截图"></p>
+<p>我们将此地址（2270C3AA280）加入到地址列表中</p>
+<h3 id="方法一（自动扫描）："><a href="#方法一（自动扫描）：" class="headerlink" title="方法一（自动扫描）："></a>方法一（自动扫描）：</h3><p>我们右键此地址点击 “对这个地址进行指针扫描”</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/cc51ddd274381683793a88c53d73747d.png" alt="截图"></p>
+<p>注意：将这个扫描的ptr缓存文件保存在不能含有中文的路径中，否则扫描结果不显示。</p>
+<p>扫描后，第一个偏移为 0x20 的地址就是矩阵地址。</p>
+<h3 id="方法二（手动跟踪）："><a href="#方法二（手动跟踪）：" class="headerlink" title="方法二（手动跟踪）："></a>方法二（手动跟踪）：</h3><p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/c57ce6d2c9607fefe0dbef1cd5026335.png" alt="截图"></p>
+<p>我们右键此地址 “ 找出是什么访问了这个地址 ”</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/85c44bfaf35b47e6ceb5b20da1c52cc2.png" alt="截图"></p>
+<p>点击 显示反汇编程序</p>
+<p>我们在rbx+280处下断运行，观察rbx是否变化</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/0bb555e81ef55bd8fdd1afc48fe481b7.png" alt="截图"></p>
+<p>不变化，复制rbx的值，取消刚才断点继续运行，在CE中搜索刚才复制的值，我们得到11个结果</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/277d3dccaf859d535c101681401169d0.png" alt="截图"></p>
+<p>在这些地址中找到有访问的地址将其加入到地址列表中，一般都为这样</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/41d1e2e33b00d0903738000770ea33e3.png" alt="截图"></p>
+<p>然后我们将这个地址 -0x20 然后继续搜索这个值</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/226c942b3feed44b0e5b03e6928fe2f8.png" alt="截图"></p>
+<p>得到一个静态地址，这个地址+0x20+0x180就是指向的矩阵地址。</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/cb11a00428974acbedd67ff78a8f82e8.png" alt="截图"></p>
+<ul>
+<li><h3 id="为什么会-0x20？"><a href="#为什么会-0x20？" class="headerlink" title="为什么会 - 0x20？"></a>为什么会 - 0x20？</h3></li>
+</ul>
+<p>因为在标准的UE4引擎中这个 0X20 是固定的，</p>
+<p>老版本的矩阵地址偏移一般为： 0x20-&gt;0x270</p>
+<p>新版本的矩阵地址偏移一般为： 0x20-&gt;0x280</p>
+<h2 id="如何利用PlayerController（玩家实例）寻找鼠标X、Y？"><a href="#如何利用PlayerController（玩家实例）寻找鼠标X、Y？" class="headerlink" title="如何利用PlayerController（玩家实例）寻找鼠标X、Y？"></a>如何利用PlayerController（玩家实例）寻找鼠标X、Y？</h2><p>我们直接对PlayerController（玩家实例）进行结构分析，找到指向APawn的三个相同的指针地址</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/80a0f504e7b995bb587794946d9183ab.png" alt="截图"></p>
+<p>继续晃动鼠标，我们发现只有0x28C的值类似鼠标坐标，我们将其添加到地址列表中，此时这个地址的值为-121.06。Ctrl+B浏览内存发现他-4的地址还有一个类似的值，我们也将其添加到地址列表中。</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/50c6a5dbfebcd8644aeb828ffb20e3c8.png" alt="截图"></p>
+<br>
+
+<p>这两个地址其实就是我们的鼠标地址，0x288为Y，0x28C为X 。</p>
+<p>在一般游戏中较小的偏移一般为X，较大的偏移一般为Y，但在UE4中正好相反。</p>
+<h2 id="如何利用PlayerController（玩家实例）寻找相机？"><a href="#如何利用PlayerController（玩家实例）寻找相机？" class="headerlink" title="如何利用PlayerController（玩家实例）寻找相机？"></a>如何利用PlayerController（玩家实例）寻找相机？</h2><p>我们还是找到指向APawn（本地玩家）的三个相同的指针地址</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/ae0e86cb8de244532482fd1c6026b8a1.png" alt="截图"></p>
+<p>我们在CameraController中找到一组类似坐标的值（其中有很多0.xxx的数都不是，继续往下找）</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/3b09690fdcf432f207a1b98661590788.png" alt="截图"></p>
+<p>我们发现一组数据，摇晃鼠标数值会随之浮动，所以这个就是CameraPos（相机坐标）</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/1eb980cd392fed2f75f5cbe89faf55d3.png" alt="截图"></p>
+<p>我们通过下图对比发现，其中有两个坐标和我们鼠标XY的值有时相同</p>
+<img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/f7be480be28c6c5c5d8968fc360cfcc7.png" alt="截图" style="zoom:50%;">
+
+<p>这两个值所对应的地址就是CameraRot，我们可以利用这个地址进行相机转换。</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/2ad5239b9c2b175aa521ba77ffa96f02.png" alt="截图"></p>
+<p>所以0xEB8就是我们的CameraFov。</p>
+<h2 id="如何利用Apawn（本地玩家）寻找MeshArray（骨骼数组）？"><a href="#如何利用Apawn（本地玩家）寻找MeshArray（骨骼数组）？" class="headerlink" title="如何利用Apawn（本地玩家）寻找MeshArray（骨骼数组）？"></a>如何利用Apawn（本地玩家）寻找MeshArray（骨骼数组）？</h2><h3 id="什么是MeshArray（骨骼数组）？"><a href="#什么是MeshArray（骨骼数组）？" class="headerlink" title="什么是MeshArray（骨骼数组）？"></a>什么是MeshArray（骨骼数组）？</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在虚幻4游戏世界中骨骼点都是以数组的方式呈现，骨骼数组是实体对象的一部分，或者说是一个组件，所以MeshArray（骨骼数组）是包含在APawn（本地玩家）里的。根据这个特性我们就可以寻找到MeshArray和其他绘制骨骼所需要的指针。</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何寻找-MeshArray（骨骼数组）？"><a href="#如何寻找-MeshArray（骨骼数组）？" class="headerlink" title="如何寻找 MeshArray（骨骼数组）？"></a>如何寻找 MeshArray（骨骼数组）？</h3><p>我们首先分析 <strong>Apawn（本地玩家）</strong>的数据结构，找到四个或三个紧紧相邻的指针：</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/7925c5e6d6237c35e6c9c9c13e21c5fb.png" alt="截图"></p>
+<p>这四个紧紧相临的指针的第一个指针就是 <strong>MeshComponent</strong>，<strong>MeshArray</strong> 和绘制骨骼所需要的** ComponentToWorld **就包含在里面。</p>
+<p>找到 **MeshComPonent **以后，接下来我们寻找 **MeshArray **，类似下图结构的就是 **MeshArray **：</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/c51bf2f77d3119a222a98259e62f1c0a.png" alt="截图"></p>
+<p>展开这两个指针，在游戏中走动这两个指针里的数据都在变化，这两个用哪个都可以。</p>
+<h3 id="如何寻找-ComponentToWorld？"><a href="#如何寻找-ComponentToWorld？" class="headerlink" title="如何寻找 ComponentToWorld？"></a>如何寻找 ComponentToWorld？</h3><p>我们翻到 MeshComponent 指针的头部，从头开始找两组类似坐标的数据：</p>
+<p>第一组：</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/b70007d4f167ab36c5950d1f459e4139.png" alt="截图"></p>
+<p>第二组（ComponentToWorld就包含在里面）：</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/5d55663e3ff3f13e0f9c63c2bba10e1e.png" alt="截图"></p>
+<h3 id="如何寻找-MeshNameArray（骨骼名称数组）？"><a href="#如何寻找-MeshNameArray（骨骼名称数组）？" class="headerlink" title="如何寻找 MeshNameArray（骨骼名称数组）？"></a>如何寻找 MeshNameArray（骨骼名称数组）？</h3><p>我们返回到** MeshArray （骨骼数组）**的位置：</p>
+<p>找到第一个骨骼数组往上的第一个指针：</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/fa00ef47042e8a4cfec29ea7ed516d35.png" alt="截图"></p>
+<p>我们进入 <strong>StaticMesh（静态骨骼指针）</strong>：</p>
+<p>我们找到两组包含数量和定义数量和我们骨骼数组相同的两个数组，</p>
+<p>第一个数组就是 <strong>MeshNameArray（骨骼名称数组）</strong></p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/d41f3e1cbf10b94d780bf8f417d03e95.png" alt="截图"></p>
+<p><strong>MeshNameArray（骨骼名称数组）</strong>内部排列：</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/527b9e77e8639572f6da68f99e9a3ad4.png" alt="截图"></p>
+<h2 id="如何寻找-Objectid-以及-PlayerState-？（补充）"><a href="#如何寻找-Objectid-以及-PlayerState-？（补充）" class="headerlink" title="如何寻找 Objectid 以及 PlayerState ？（补充）"></a>如何寻找 Objectid 以及 PlayerState ？（补充）</h2><h3 id="什么是Objectid？"><a href="#什么是Objectid？" class="headerlink" title="什么是Objectid？"></a>什么是Objectid？</h3><p>**Objectid **是用于储存对应实体对象类名ID的一个变量，可以配合Gname的算法得到这个实体对象的类名。</p>
+<p>如何寻找Objectid？</p>
+<p>我们随便找一个实体对象指针，这里我们用APawn （本人）指针来演示：</p>
+<p>在标准的UE4引擎中，实体对象指针 + 0x18 就是我们的Objectid</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/2e39a141b6d825a5396524613347fc78.png" alt="截图"></p>
+<h3 id="如何寻找-PlayerState-？"><a href="#如何寻找-PlayerState-？" class="headerlink" title="如何寻找 PlayerState ？"></a>如何寻找 PlayerState ？</h3><p>PlayerState 在结构中位于 MeshComponent 的上面，我们可以利用 MeshComponent 寻找：</p>
+<p>我们还是分析Apawn的结构，在APawn中找到 MeshComponent ，MeshComponent 的上方有两个紧紧相邻的指针</p>
+<p>离 MeshComponent 最近的那个指针就是 PlayerState 。</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/45e088784bb7ae2a255e0393fcc27fc2.png" alt="截图"></p>
+<p>有时CE分析会出现这种结果：</p>
+<p>我们就需要更改地址显示的数据类型来查看是否是指针</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/dd6213de9d554a36386a4f07d5920527.png" alt="截图"></p>
+<p>这两个指针的下面都有一个字符串形式的数据。且字符串下面的4字节数据都为2。（可以多找几个UE4游戏判断通用特征，积累实战经验。）</p>
+<h3 id="如何寻找-PlayerName（玩家的自定义名称）-？"><a href="#如何寻找-PlayerName（玩家的自定义名称）-？" class="headerlink" title="如何寻找 PlayerName（玩家的自定义名称） ？"></a>如何寻找 PlayerName（玩家的自定义名称） ？</h3><p>PlayerName 被包含在 PlayerState 里，其他 Teamid、KillCount也包含在其中。</p>
+<p>我们先找 PlayerName：</p>
+<p>进入 PlayerState 指针，找到如下图所示排列的指针 （最多翻500偏移即可找到）</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/c8ddb9cb26f63fa56faae788a697b652.png" alt="截图"></p>
+<p>一个一个进去看指针的头部有没有Unicode String 类型的 数据 也就是字符串数据。我这里用的是Apawn分析的，所以这个字符串应该是我自己的名字，建议用APawn来分析。</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/d743d3ce6456adeb59457b1c0a9fc4d6.png" alt="截图"></p>
+<h3 id="如何寻找-人物穿墙-灵魂出窍-以及-几种加速？"><a href="#如何寻找-人物穿墙-灵魂出窍-以及-几种加速？" class="headerlink" title="如何寻找 人物穿墙 灵魂出窍 以及 几种加速？"></a>如何寻找 人物穿墙 灵魂出窍 以及 几种加速？</h3><p><strong>人物穿墙 和 灵魂出窍 都比较好找 都在APawn头部</strong></p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/05f3267e0bac0fb53ca5421a56b38217.png" alt="截图"></p>
+<p><strong>全局加速</strong>：</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/bf995cbe05de5dd43d248bd6c2c3c569.png" alt="截图"></p>
+<p><strong>局部加速</strong>：</p>
+<p>在APawn里找到那四个紧紧相临的四个指针，</p>
+<p>第一个是MeshComponent（骨骼组件）第二个就是MoveComponent（移动组件）进入移动组件</p>
+<p>靠近头部，很多指针相邻的下面</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/26fc82a6f18dfb6bb984faba821928e4.png" alt="截图"></p>
+<h3 id="制作特征码快速获得所需偏移！"><a href="#制作特征码快速获得所需偏移！" class="headerlink" title="制作特征码快速获得所需偏移！"></a>制作特征码快速获得所需偏移！</h3><p>Uworld:</p>
+<p>48 89 0D ?? ?? ?? ?? 4D 85 F6 74 ?? 49 [+3]</p>
+<p>Gname：</p>
+<p>48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B 54 ?? ?? 4C 8B C0</p>
+<p>Matrix：</p>
+<p>41 8B ?? ?? 83 F8 ?? 74 ?? 48 8B 15 ?? ?? ?? ?? 0F 1F 84 ?? ?? ?? ?? ?? 48 63 C8 48 8D</p>
+<p>Ulevel:</p>
+<p>48 8B ?? ?? 0F B6 EA 48 85 C9 74 ?? 41 0F [+3]</p>
+<p>Count:</p>
+<p>48 8B 41 ?? 48 85 C0 74 ?? 83 B8 ?? ?? ?? ?? ?? 74 ?? B0</p>
+<p>Actor:</p>
+<p>49 8B 85 ?? ?? ?? ?? 4A 89 ?? ?? 4D 63 BD ?? ?? ?? ?? 41 8D</p>
+<p>GameInstance:</p>
+<p>48 8b 86 ?? ?? ?? ?? 48 85 C0 48 8D ?? ?? ?? ?? ?? 48 8B</p>
+<p>ULocalPlayer:</p>
+<p>48 8B ?? ?? 48 8B ?? ?? 48 85 D2 74 ?? 48 8B 42 ?? 48 85 C0</p>
+<p>Apawn:</p>
+<p>48 8B 8E ?? ?? ?? ?? 48 8B 9C ?? ?? ?? ?? ?? 48 85 C9 75</p>
+<p>RootComponent:</p>
+<p>49 8B 9D ?? ?? ?? ?? 48 85 DB 74 ?? 0F 10</p>
+<p>Vector3D:</p>
+<p>41 0F 10 8A ?? ?? ?? ?? 0F ?? 4B ?? 41</p>
+<p>PlayerState:</p>
+<p>48 8B 9B ?? ?? ?? ?? B8 ?? ?? ?? ?? 48 8B</p>
+<p>MeshComponent:</p>
+<p>48 8B 8F ?? ?? ?? ?? 48 85 C9 74 ?? E8 ?? ?? ?? ?? 48 85 C0 74 ?? 48</p>
+<h2 id="使用Hook实现子弹追踪-受子弹下坠影响-！"><a href="#使用Hook实现子弹追踪-受子弹下坠影响-！" class="headerlink" title="使用Hook实现子弹追踪(受子弹下坠影响)！"></a>使用Hook实现子弹追踪(受子弹下坠影响)！</h2><h3 id="SCUM-子弹追踪特征码："><a href="#SCUM-子弹追踪特征码：" class="headerlink" title="SCUM 子弹追踪特征码："></a>SCUM 子弹追踪特征码：</h3><p>41 0F 28 D0 E8 ?? ?? ?? ?? F2 (失效)</p>
+<p>41 0F 28 ?? E8 ?? ?? ?? ?? 44 0F 28 ?? ?? ?? F2 0F 10</p>
+<p>特征：</p>
+<ul>
+<li>有两个相同的Call</li>
+<li>Call下面有一个 Je 跳转</li>
+<li>在第二个Call处下断，开枪会断住</li>
+</ul>
+<p>追踪地址（Hook地址）：SCUM.exe+1D81103</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/e3e10a612087785e663db64b6639c311.png" alt="截图"></p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/4f8b248156e91337721f9e754360e588.png" alt="截图"></p>
+<h3 id="追踪地址反汇编代码："><a href="#追踪地址反汇编代码：" class="headerlink" title="追踪地址反汇编代码："></a><strong>追踪地址反汇编代码：</strong></h3><p>SCUM.exe+1D810D1 - 0F28 D0               - movaps xmm2,xmm0<br>SCUM.exe+1D810D4 - E8 171B60FF           - call SCUM.exe+1382BF0<br>SCUM.exe+1D810D9 - F3 44 0F59 1D 9E8F2C03  - mulss xmm11,[SCUM.exe+504A080]<br>SCUM.exe+1D810E2 - 4C 8D 4C 24 70        - lea r9,[rsp+70]<br>SCUM.exe+1D810E7 - 48 8D 54 24 30        - lea rdx,[rsp+30]<br>SCUM.exe+1D810EC - 48 8D 4C 24 40        - lea rcx,[rsp+40]<br>SCUM.exe+1D810F1 - 41 0F28 D3            - movaps xmm2,xmm11<br>SCUM.exe+1D810F5 - E8 F61A60FF           - call SCUM.exe+1382BF0<br>SCUM.exe+1D810FA - 44 0F28 9C 24 00020000  - movaps xmm11,[rsp+00000200]<br>SCUM.exe+1D81103 - F2 0F10 38            - movsd xmm7,[rax]<br>SCUM.exe+1D81107 - F3 44 0F10 40 08      - movss xmm8,[rax+08]<br>SCUM.exe+1D8110D - 0F28 F7               - movaps xmm6,xmm7<br>SCUM.exe+1D81110 - 0FC6 F6 55            - shufps xmm6,xmm6,55</p>
+<br>
+
+<h3 id="利用Hook在CE中实现简单的子弹追踪："><a href="#利用Hook在CE中实现简单的子弹追踪：" class="headerlink" title="利用Hook在CE中实现简单的子弹追踪："></a>利用Hook在CE中实现简单的子弹追踪：</h3><p>空白特征：</p>
+<p>00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</p>
+<p>我们首先在游戏中找一段空白的地址：SCUM.exe+6100820</p>
+<p>然后在空白地址写入我们Hook的汇编代码：</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/2d9c79359bb0ff9a61457ee877c63ce3.png" alt="截图"></p>
+<p>字节代码（Hook）：</p>
+<p>66 83 3D 38 00 00 00 00 74 16 F2 0F 10 3D 3E 00 00 00 F3 44 0F 10 05 3D 00 00 00 E9 CD 08 C8 FB F2 0F 10 38 F3 44 0F 10 40 08 EB EF</p>
+<p>回到我们的Hook地址：</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/c90dcf4fe863462d6206907c0d7b889d.png" alt="截图"></p>
+<p>将此汇编修改为：</p>
+<p>Hook地址汇编：E9 18 F7 37 04 90 90 90 90 90</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/40090c5733772addc42291552efe8bd9.png" alt="截图"></p>
+<p><strong>将下方Je 汇编代码，修改为Jne。</strong></p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/6456b32e3ae17047f47d6eabd134b2ff.png" alt="截图"></p>
+<h3 id="关键："><a href="#关键：" class="headerlink" title="关键："></a>关键：</h3><p><strong>设置空白地址内存页属性为（可执行&#x2F;可读&#x2F;可写）！！！！</strong></p>
+<p>因为我们在Hook中做了一个比较，所以我们有一个开关的功能。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ul>
+<li>空白地址：SCUM.exe+6100820</li>
+<li>空白地址汇编：66 83 3D 38 00 00 00 00 74 16 F2 0F 10 3D 3E 00 00 00 F3 44 0F 10 05 3D 00 00 00 E9 CD 08 C8 FB F2 0F 10 38 F3 44 0F 10 40 08 EB EF</li>
+<li>Hook地址：SCUM.exe+1D81103</li>
+<li>Hook地址修改汇编：E9 18 F7 37 04</li>
+<li>Je跳转地址：SCUM.exe+1D8113D</li>
+<li>Je地址汇编：75 71</li>
+<li>开关地址：SCUM.exe+6100860  （四字节）</li>
+<li>追踪.x : SCUM.exe+6100870  （单浮点）</li>
+<li>追踪.y : SCUM.exe+6100874  （单浮点）</li>
+<li>追踪.z : SCUM.exe+6100878  （单浮点）</li>
+</ul>
+<p>我们往追踪地址传入我们想让他击打的坐标，就可以完成追踪。</p>
+<h2 id="使用Hook实现魔术子弹（瞬击，穿墙）！"><a href="#使用Hook实现魔术子弹（瞬击，穿墙）！" class="headerlink" title="使用Hook实现魔术子弹（瞬击，穿墙）！"></a>使用Hook实现魔术子弹（瞬击，穿墙）！</h2><h3 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h3><p>使用Hook手段修改出膛子弹的坐标，让子弹直接飞到目标脸上。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在UE4引擎中所有的实体对象都有他的唯一 **标识符** ，子弹也包括在其中，想要实现修改子弹坐标，我们需要在游戏世界如此多的对象中找到隶属于 **子弹的唯一标识符** 。</span><br><span class="line"></span><br><span class="line">想要修改子弹坐标，我们还需要找到给 **坐标赋值的源代码** ，对源代码进行hook，单靠修改数值是无法修改的。所以我们还要找到它修改坐标源代码的地址。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="寻找所需数据："><a href="#寻找所需数据：" class="headerlink" title="寻找所需数据："></a>寻找所需数据：</h3><p>子弹唯一标识符：（在游戏中开枪遍历世界对象对子弹标识符进行绘制）</p>
+<p>HEX : 95710A （经多次测试，每种口径的子弹ID都为 0x95710A）</p>
+<p>源代码：访问 RootComponent 下第三组坐标偏移的地址。</p>
+<p>右键找出是什么改写了这个地址：</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/a5acadd91e6a33e4a85bf0540525a376.png" alt="截图"></p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/a4c9f9c1d75e1ed1624caeca9a671cdd.png" alt="截图"></p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/693872ab8f4f1fe441be676529953254.png" alt="截图"></p>
+<p>因为这次我们需要比较类名，所以写的复杂一点，但也大差不差。</p>
+<p>原始代码：<br>SCUM.exe+3A1B4C7 - 33 D2                 - xor edx,edx<br>SCUM.exe+3A1B4C9 - EB 1C                 - jmp SCUM.exe+3A1B4E7<br>SCUM.exe+3A1B4CB - 0F11 BF C0010000      - movups [rdi+000001C0],xmm7<br>SCUM.exe+3A1B4D2 - 45 8B C6              - mov r8d,r14d<br>SCUM.exe+3A1B4D5 - 44 0F11 A7 D0010000   - movups [rdi+000001D0],xmm12<br>SCUM.exe+3A1B4DD - B2 01                 - mov dl,01<br>SCUM.exe+3A1B4DF - 44 0F11 B7 E0010000   - movups [rdi+000001E0],xmm14<br>SCUM.exe+3A1B4E7 - 48 8B CF              - m ov rcx,rdi</p>
+<p>老方法找一个空白地址写入我们的Hook代码：</p>
+<p><strong>空白地址</strong>：SCUM.exe+6100900</p>
+<p>Hook地址：SCUM.exe+3A1B4D5 - 44 0F11 A7 D0010000   - movups [rdi+000001D0],xmm12</p>
+<p>我们还是要写一个开关，让他需要的时候再执行</p>
+<p><img src="/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/a06bf8d7b57f312663e7554bb1ca8300.png" alt="截图"></p>
+<p>总结数据：</p>
+<p>修改后：</p>
+<p>SCUM.exe+3A1B4C7 - 33 D2                 - xor edx,edx<br>SCUM.exe+3A1B4C9 - EB 1C                 - jmp SCUM.exe+3A1B4E7<br>SCUM.exe+3A1B4CB - 0F11 BF C0010000      - movups [rdi+000001C0],xmm7<br>SCUM.exe+3A1B4D2 - 45 8B C6              - mov r8d,r14d<br>SCUM.exe+3A1B4D5 - E9 26546E02           - jmp SCUM.exe+6100900<br>SCUM.exe+3A1B4DA - 90                    - nop<br>SCUM.exe+3A1B4DB - 90                    - nop<br>SCUM.exe+3A1B4DC - 90                    - nop<br>SCUM.exe+3A1B4DD - B2 01                 - mov dl,01<br>SCUM.exe+3A1B4DF - 44 0F11 B7 E0010000   - movups [rdi+000001E0],xmm14<br>SCUM.exe+3A1B4E7 - 48 8B CF              - mov rcx,rdi</p>
+<p>Hook段汇编：</p>
+<p>SCUM.exe+6100900 - 66 83 3D 48000000 00  - cmp word ptr [SCUM.exe+6100950],00<br>SCUM.exe+6100908 - 74 09                 - je SCUM.exe+6100913<br>SCUM.exe+610090A - 81 7F 18 0A719500     - cmp [rdi+18],0095710A<br>SCUM.exe+6100911 - 74 17                 - je SCUM.exe+610092A<br>SCUM.exe+6100913 - 44 0F11 A7 D0010000   - movups [rdi+000001D0],xmm12<br>SCUM.exe+610091B - B2 01                 - mov dl,01<br>SCUM.exe+610091D - 44 0F11 B7 E0010000   - movups [rdi+000001E0],xmm14<br>SCUM.exe+6100925 - E9 BDAB91FD           - jmp SCUM.exe+3A1B4E7<br>SCUM.exe+610092A - 44 0F10 25 2E000000   - movups xmm12,[SCUM.exe+6100960]<br>SCUM.exe+6100932 - 44 0F11 A7 D0010000   - movups [rdi+000001D0],xmm12<br>SCUM.exe+610093A - 8B 0D 28000000        - mov ecx,[SCUM.exe+6100968]<br>SCUM.exe+6100940 - 89 8F D8010000        - mov [rdi+000001D8],ecx<br>SCUM.exe+6100946 - EB DD                 - jmp SCUM.exe+6100925</p>
+<ul>
+<li><strong>空白地址</strong>：SCUM.exe+6100900</li>
+<li>Hook汇编：66 83 3D 48 00 00 00 00 74 09 81 7F 18 0A 71 95 00 74 17 44 0F 11 A7 D0 01 00 00 B2 01 44 0F 11 B7 E0 01 00 00 E9 BD AB 91 FD 44 0F 10 25 2E 00 00 00 44 0F 11 A7 D0 01 00 00 8B 0D 28 00 00 00 89 8F D8 01 00 00 EB DD</li>
+<li>Hook汇编：66 83 3D 48 00 00 00 00 74 09 81 7F 18 D1 6E 95 00 74 17 44 0F 11 A7 D0 01 00 00 B2 01 44 0F 11 B7 E0 01 00 00 E9 10 E6 91 FD 44 0F 10 25 2E 00 00 00 44 0F 11 A7 D0 01 00 00 8B 0D 28 00 00 00 89 8F D8 01 00 00 EB DD</li>
+<li>Hook地址：SCUM.exe+3A1B4D5 </li>
+<li>Hook地址汇编：E9 26 54 6E 02 90 90 90</li>
+<li>开关地址：SCUM.exe+6100950 （4字节）</li>
+<li>坐标.x : SCUM.exe+6100960</li>
+<li>坐标.y : SCUM.exe+6100964</li>
+<li>坐标.z : SCUM.exe+6100968</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__title"><span class="post-copyright-info"><h>Unreal Engine 4 从入门到入狱</h></span></div><div class="post-copyright__type"><span class="post-copyright-info"><a href="http://darking.cc/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/">http://darking.cc/2022/12/15/Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1/</a></span></div><div class="post-copyright-m"><div class="post-copyright-m-info"><div class="post-copyright-a"><h>作者</h><div class="post-copyright-cc-info"><h>Darking</h></div></div><div class="post-copyright-c"><h>发布于</h><div class="post-copyright-cc-info"><h>2022-12-15</h></div></div><div class="post-copyright-u"><h>更新于</h><div class="post-copyright-cc-info"><h>2022-12-16</h></div></div><div class="post-copyright-c"><h>许可协议</h><div class="post-copyright-cc-info"><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a rel="noopener" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></div></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Unreal-Engine4-%E9%80%86%E5%90%91/">Unreal Engine4 逆向</a></div><div class="post_share"><div class="social-share" data-image="https://pic1.zhimg.com/v2-ac36f232a5ceaec485025d265caa79cc_180x120.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/TX.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Darking</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/itaproxx"><i class="fab fa-github"></i><span>🛴前往小家...</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/itaproxx" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:itaproxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">胡乱学习，胡乱记录</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Unreal-Engine-4-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E7%8B%B1"><span class="toc-number">1.</span> <span class="toc-text">Unreal Engine 4 从入门到入狱</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFUworld%EF%BC%9F"><span class="toc-number">1.0.1.</span> <span class="toc-text">什么是Uworld？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8CE%E5%AF%BB%E6%89%BEUworld"><span class="toc-number">1.1.</span> <span class="toc-text">如何使用CE寻找Uworld</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8Count%EF%BC%88-%E6%95%B0%E9%87%8F-%EF%BC%89%E5%8F%8D%E5%90%91%E5%AF%BB%E6%89%BEUworld"><span class="toc-number">1.1.1.</span> <span class="toc-text">利用Count（ 数量 ）反向寻找Uworld</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8CE%E5%AF%BB%E6%89%BEGname"><span class="toc-number">1.2.</span> <span class="toc-text">如何使用CE寻找Gname</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFGname%EF%BC%9F"><span class="toc-number">1.2.1.</span> <span class="toc-text">什么是Gname？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE4-23%E7%89%88%E6%9C%AC%E4%B8%80%E4%B8%8BGname%EF%BC%88%E6%97%A7%E7%89%88%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">如何寻找4.23版本一下Gname（旧版）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE4-23%E7%89%88%E6%9C%AC%E4%BB%A5%E4%B8%8AGname%EF%BC%88%E6%96%B0%E7%89%88%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">如何寻找4.23版本以上Gname（新版）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8IDA%E5%AF%BB%E6%89%BEUworld"><span class="toc-number">1.3.</span> <span class="toc-text">如何使用IDA寻找Uworld</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8IDA%E5%AF%BB%E6%89%BEGname"><span class="toc-number">1.4.</span> <span class="toc-text">如何使用IDA寻找Gname</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8IDA%E5%AF%BB%E6%89%BEGameInstance-Ulevel-Actor"><span class="toc-number">1.5.</span> <span class="toc-text">如何使用IDA寻找GameInstance.Ulevel.Actor</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8IDA%E5%AF%BB%E6%89%BEUlevel"><span class="toc-number">1.5.1.</span> <span class="toc-text">如何使用IDA寻找Ulevel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8IDA%E5%AF%BB%E6%89%BEGameInstance"><span class="toc-number">1.5.2.</span> <span class="toc-text">如何使用IDA寻找GameInstance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8CE%E5%AF%BB%E6%89%BELocalPlayer-PlayerController"><span class="toc-number">1.5.3.</span> <span class="toc-text">如何使用CE寻找LocalPlayer.PlayerController</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E4%B8%8B%E6%9D%A5%E6%88%91%E4%BB%AC%E5%9C%A8Localplayer%E4%B8%AD%E5%AF%BB%E6%89%BEApawn%EF%BC%88%E6%9C%AC%E5%9C%B0%E7%8E%A9%E5%AE%B6%EF%BC%89%EF%BC%9A"><span class="toc-number">1.5.4.</span> <span class="toc-text">接下来我们在Localplayer中寻找Apawn（本地玩家）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8-Apawn%EF%BC%88%E6%9C%AC%E5%9C%B0%E7%8E%A9%E5%AE%B6%EF%BC%89%E5%AF%BB%E6%89%BE%E5%85%B1%E7%94%A8%E5%9D%90%E6%A0%87%E5%81%8F%E7%A7%BB%EF%BC%9A"><span class="toc-number">1.5.5.</span> <span class="toc-text">如何利用 Apawn（本地玩家）寻找共用坐标偏移：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E9%80%9A%E7%94%A8%E7%89%B9%E5%BE%81%E7%A0%81%E5%AF%BB%E6%89%BE%E7%9F%A9%E9%98%B5%E5%81%8F%E7%A7%BB%EF%BC%88%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%89"><span class="toc-number">1.6.</span> <span class="toc-text">如何利用通用特征码寻找矩阵偏移（两种方法）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%88%E8%87%AA%E5%8A%A8%E6%89%AB%E6%8F%8F%EF%BC%89%EF%BC%9A"><span class="toc-number">1.6.1.</span> <span class="toc-text">方法一（自动扫描）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%88%E6%89%8B%E5%8A%A8%E8%B7%9F%E8%B8%AA%EF%BC%89%EF%BC%9A"><span class="toc-number">1.6.2.</span> <span class="toc-text">方法二（手动跟踪）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A-0x20%EF%BC%9F"><span class="toc-number">1.6.3.</span> <span class="toc-text">为什么会 - 0x20？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8PlayerController%EF%BC%88%E7%8E%A9%E5%AE%B6%E5%AE%9E%E4%BE%8B%EF%BC%89%E5%AF%BB%E6%89%BE%E9%BC%A0%E6%A0%87X%E3%80%81Y%EF%BC%9F"><span class="toc-number">1.7.</span> <span class="toc-text">如何利用PlayerController（玩家实例）寻找鼠标X、Y？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8PlayerController%EF%BC%88%E7%8E%A9%E5%AE%B6%E5%AE%9E%E4%BE%8B%EF%BC%89%E5%AF%BB%E6%89%BE%E7%9B%B8%E6%9C%BA%EF%BC%9F"><span class="toc-number">1.8.</span> <span class="toc-text">如何利用PlayerController（玩家实例）寻找相机？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8Apawn%EF%BC%88%E6%9C%AC%E5%9C%B0%E7%8E%A9%E5%AE%B6%EF%BC%89%E5%AF%BB%E6%89%BEMeshArray%EF%BC%88%E9%AA%A8%E9%AA%BC%E6%95%B0%E7%BB%84%EF%BC%89%EF%BC%9F"><span class="toc-number">1.9.</span> <span class="toc-text">如何利用Apawn（本地玩家）寻找MeshArray（骨骼数组）？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFMeshArray%EF%BC%88%E9%AA%A8%E9%AA%BC%E6%95%B0%E7%BB%84%EF%BC%89%EF%BC%9F"><span class="toc-number">1.9.1.</span> <span class="toc-text">什么是MeshArray（骨骼数组）？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE-MeshArray%EF%BC%88%E9%AA%A8%E9%AA%BC%E6%95%B0%E7%BB%84%EF%BC%89%EF%BC%9F"><span class="toc-number">1.9.2.</span> <span class="toc-text">如何寻找 MeshArray（骨骼数组）？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE-ComponentToWorld%EF%BC%9F"><span class="toc-number">1.9.3.</span> <span class="toc-text">如何寻找 ComponentToWorld？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE-MeshNameArray%EF%BC%88%E9%AA%A8%E9%AA%BC%E5%90%8D%E7%A7%B0%E6%95%B0%E7%BB%84%EF%BC%89%EF%BC%9F"><span class="toc-number">1.9.4.</span> <span class="toc-text">如何寻找 MeshNameArray（骨骼名称数组）？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE-Objectid-%E4%BB%A5%E5%8F%8A-PlayerState-%EF%BC%9F%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89"><span class="toc-number">1.10.</span> <span class="toc-text">如何寻找 Objectid 以及 PlayerState ？（补充）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFObjectid%EF%BC%9F"><span class="toc-number">1.10.1.</span> <span class="toc-text">什么是Objectid？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE-PlayerState-%EF%BC%9F"><span class="toc-number">1.10.2.</span> <span class="toc-text">如何寻找 PlayerState ？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE-PlayerName%EF%BC%88%E7%8E%A9%E5%AE%B6%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%8D%E7%A7%B0%EF%BC%89-%EF%BC%9F"><span class="toc-number">1.10.3.</span> <span class="toc-text">如何寻找 PlayerName（玩家的自定义名称） ？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AF%BB%E6%89%BE-%E4%BA%BA%E7%89%A9%E7%A9%BF%E5%A2%99-%E7%81%B5%E9%AD%82%E5%87%BA%E7%AA%8D-%E4%BB%A5%E5%8F%8A-%E5%87%A0%E7%A7%8D%E5%8A%A0%E9%80%9F%EF%BC%9F"><span class="toc-number">1.10.4.</span> <span class="toc-text">如何寻找 人物穿墙 灵魂出窍 以及 几种加速？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E7%89%B9%E5%BE%81%E7%A0%81%E5%BF%AB%E9%80%9F%E8%8E%B7%E5%BE%97%E6%89%80%E9%9C%80%E5%81%8F%E7%A7%BB%EF%BC%81"><span class="toc-number">1.10.5.</span> <span class="toc-text">制作特征码快速获得所需偏移！</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Hook%E5%AE%9E%E7%8E%B0%E5%AD%90%E5%BC%B9%E8%BF%BD%E8%B8%AA-%E5%8F%97%E5%AD%90%E5%BC%B9%E4%B8%8B%E5%9D%A0%E5%BD%B1%E5%93%8D-%EF%BC%81"><span class="toc-number">1.11.</span> <span class="toc-text">使用Hook实现子弹追踪(受子弹下坠影响)！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SCUM-%E5%AD%90%E5%BC%B9%E8%BF%BD%E8%B8%AA%E7%89%B9%E5%BE%81%E7%A0%81%EF%BC%9A"><span class="toc-number">1.11.1.</span> <span class="toc-text">SCUM 子弹追踪特征码：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%BD%E8%B8%AA%E5%9C%B0%E5%9D%80%E5%8F%8D%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">1.11.2.</span> <span class="toc-text">追踪地址反汇编代码：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8Hook%E5%9C%A8CE%E4%B8%AD%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%90%E5%BC%B9%E8%BF%BD%E8%B8%AA%EF%BC%9A"><span class="toc-number">1.11.3.</span> <span class="toc-text">利用Hook在CE中实现简单的子弹追踪：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%EF%BC%9A"><span class="toc-number">1.11.4.</span> <span class="toc-text">关键：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">1.11.5.</span> <span class="toc-text">总结：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Hook%E5%AE%9E%E7%8E%B0%E9%AD%94%E6%9C%AF%E5%AD%90%E5%BC%B9%EF%BC%88%E7%9E%AC%E5%87%BB%EF%BC%8C%E7%A9%BF%E5%A2%99%EF%BC%89%EF%BC%81"><span class="toc-number">1.12.</span> <span class="toc-text">使用Hook实现魔术子弹（瞬击，穿墙）！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="toc-number">1.12.1.</span> <span class="toc-text">原理：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BB%E6%89%BE%E6%89%80%E9%9C%80%E6%95%B0%E6%8D%AE%EF%BC%9A"><span class="toc-number">1.12.2.</span> <span class="toc-text">寻找所需数据：</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By Darking</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script defer src="/js/light.js"></script><link rel="stylesheet" href="/css/universe.css"><script defer src="/js/cursor.js"></script><div class="aplayer no-destroy" data-id="4895239160" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script id="canvas_nest" defer="defer" color="255,255,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="20px" data-random="true" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/categories/'|| '/categories/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var qweather_key = 'b16a1fa0e63c46a4b8f28abfb06ae3fe';
+  var gaud_map_key = 'e2b04289e870b005374ee030148d64fd&s=rsv3';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '113.34532,23.15624';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v6.2.0" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v4.3.1" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" data-title="本站采用多线部署，主线路托管于Vercel" title=""><img src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://dashboard.4everland.org/" style="margin-inline:5px" data-title="本站采用多线部署，备用线路托管于4EVERLAND" title=""><img src="https://img.shields.io/badge/Hosted-4EVERLAND-22DDDD?style=flat&amp;logo=IPFS" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="https://npm.elemecdn.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/12/15/Unreal-Engine-4-从入门到入狱/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="https://pic1.zhimg.com/v2-ac36f232a5ceaec485025d265caa79cc_180x120.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-12-15</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/12/15/Unreal-Engine-4-从入门到入狱/&quot;);" href="javascript:void(0);" alt="">Unreal Engine 4 从入门到入狱</a><div class="blog-slider__text">UE4逆向教程</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/12/15/Unreal-Engine-4-从入门到入狱/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '2s');
+    arr[i].setAttribute('data-wow-delay', '1s');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"https://npm.elemecdn.com/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>
